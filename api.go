@@ -209,6 +209,27 @@ func (self *Api) GetPackagesPads() (response GetPackagesPadsResponse, err error)
 	return
 }
 
+type GetPadsTreeResponse struct {
+	Items []struct {
+		Tree []struct {
+			Name     string `json:"name"`
+			Children []struct {
+				Name     string `json:"name,omitempty"`
+				Children []struct {
+					Id int `json:"id"`
+				} `json:"children,omitempty"`
+				Id int `json:"id,omitempty"`
+			} `json:"children"`
+		} `json:"tree"`
+		Id int `json:"id"`
+	} `json:"items"`
+}
+
+func (self *Api) GetPadsTree() (response GetPadsTreeResponse, err error) {
+	err = self.getRequestUnmarshal("/api/v2/pads_trees.json", &response)
+	return
+}
+
 type GetPackagesResponse struct {
 	Items []vkobj.Package `json:"items"`
 }
@@ -295,9 +316,7 @@ var AdGroupAllFieldsOption = []string{
 	"utm",
 }
 
-type GetAdGroupResponse vkobj.AdGroup
-
-func (self *Api) GetAdGroup(adGroupId int, options ...RequestOptions) (response GetAdGroupResponse, err error) {
+func (self *Api) GetAdGroup(adGroupId int, options ...RequestOptions) (response vkobj.AdGroup, err error) {
 	err = self.getRequestUnmarshal("/api/v2/ad_groups/"+strconv.Itoa(adGroupId)+".json", &response, options...)
 	return
 }
@@ -529,7 +548,7 @@ func createApiIterator[T any](api *Api, uri string, options ...RequestOptions) I
 		InitialLimit:  initialLimit,
 		InitialOffset: 0,
 		next: func(limit int, offset int) (*Iterable[T], error) {
-			var option RequestOptions
+			option := NewRequestOptions()
 			if len(options) > 0 {
 				option = options[0]
 			}

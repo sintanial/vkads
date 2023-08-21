@@ -20,15 +20,6 @@ const host = "https://ads.vk.com"
 func IntRef(f int) *int             { return &f }
 func Float64Ref(f float64) *float64 { return &f }
 
-func IntToStringSlice(i []int) []string {
-	var result []string
-	for _, val := range i {
-		result = append(result, strconv.Itoa(val))
-	}
-
-	return result
-}
-
 type authorizedRoundTripper struct {
 	token Token
 	rt    http.RoundTripper
@@ -68,7 +59,7 @@ func (o RequestOptions) GetOffset() int {
 }
 
 func (o RequestOptions) SetOffset(limit int) RequestOptions {
-	o.Set("limit", strconv.Itoa(limit))
+	o.Set("offset", strconv.Itoa(limit))
 	return o
 }
 
@@ -222,4 +213,13 @@ func CropImage(r io.Reader, width int, height int) (io.Reader, error) {
 	img.(CropableImage).SubImage(image.Rect(0, 0, width, height))
 
 	return nil, nil
+}
+
+func IntToStringSlice(i []int) []string {
+	var result []string
+	for _, val := range i {
+		result = append(result, strconv.Itoa(val))
+	}
+
+	return result
 }

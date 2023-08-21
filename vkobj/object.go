@@ -154,7 +154,7 @@ type AdPlan struct {
 	AutobiddingMode AutobiddingMode `json:"autobidding_mode,omitempty"`
 	BudgetLimit     *float64        `json:"budget_limit,omitempty"`
 	BudgetLimitDay  *float64        `json:"budget_limit_day,omitempty"`
-	MaxPrice        *float64        `json:"max_price,omitempty"`
+	MaxPrice        *float64        `json:"max_price,string,omitempty"`
 	DateStart       Date            `json:"date_start,omitempty"`
 	DateEnd         *Date           `json:"date_end,omitempty"`
 	PricedGoal      PricedGoal      `json:"priced_goal,omitempty"`
@@ -237,13 +237,13 @@ type AdGroup struct {
 	Id              int             `json:"id,omitempty"`
 	Name            string          `json:"name"`
 	Status          string          `json:"status,omitempty"`
-	AdPlanId        int             `json:"ad_plan_id,string,omitempty"`
+	AdPlanId        Int             `json:"ad_plan_id,omitempty"`
 	PackageId       int             `json:"package_id,omitempty"`
 	AgeRestrictions AgeRestriction  `json:"age_restrictions,omitempty"`
 	AutobiddingMode AutobiddingMode `json:"autobidding_mode,omitempty"`
-	BudgetLimit     *float64        `json:"budget_limit,omitempty"`
-	BudgetLimitDay  *float64        `json:"budget_limit_day,omitempty"`
-	MaxPrice        *float64        `json:"max_price,omitempty"`
+	BudgetLimit     *Float64        `json:"budget_limit,omitempty"`
+	BudgetLimitDay  *Float64        `json:"budget_limit_day,omitempty"`
+	MaxPrice        *Float64        `json:"max_price,omitempty"`
 	DateStart       Date            `json:"date_start,omitempty"`
 	DateEnd         *Date           `json:"date_end,omitempty"`
 	Objective       Objective       `json:"objective,omitempty"`
@@ -289,10 +289,10 @@ type Textblock struct {
 
 type Urls struct {
 	Id            int      `json:"id"`
-	Url           string   `json:"url"`
-	UrlObjectId   string   `json:"url_object_id"`
-	UrlObjectType string   `json:"url_object_type"`
-	UrlTypes      []string `json:"url_types"`
+	Url           string   `json:"url,omitempty"`
+	UrlObjectId   string   `json:"url_object_id,omitempty"`
+	UrlObjectType string   `json:"url_object_type,omitempty"`
+	UrlTypes      []string `json:"url_types,omitempty"`
 }
 
 type Banner struct {
