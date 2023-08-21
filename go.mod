@@ -1,6 +1,6 @@
 module github.com/sintanial/vkads
 
-go 1.20
+go 1.18
 
 require (
 	github.com/gabriel-vasile/mimetype v1.4.2
